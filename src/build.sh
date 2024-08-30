@@ -4,7 +4,7 @@
 
 function error {
 echo "Build failed."
-exit
+exit 1
 }
 
 fn=${1%.*}
@@ -33,7 +33,7 @@ for file in *-tiles.png; do
 done
 
 echo "Assembling..."
-rgbasm -h -o$fn.o $1 || error
+rgbasm -o$fn.o $1 || error
 echo "Linking..."
 rgblink -n$fn.sym -m$fn.map -o$fn.gb $fn.o || error
 echo "Fixing..."
